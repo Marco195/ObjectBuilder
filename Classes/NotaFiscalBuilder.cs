@@ -13,36 +13,44 @@ namespace ObjectBuilder.Classes
         private double impostos = 0;
         private List<Item> todoItens = new List<Item>();
 
+        /// <summary>
+        /// Monta o objeto de <see cref="NotaFiscal"/>
+        /// </summary>
         public NotaFiscal Constroi()
         {
             return new NotaFiscal(RazaoSocial, Cnpj, Data, valorTotal, impostos, todoItens, Observacoes);
         }
 
-        public void ParaEmpresa(string RazaoSocial)
+        public NotaFiscalBuilder ParaEmpresa(string RazaoSocial)
         {
             this.RazaoSocial = RazaoSocial;
+            return this;
         }
 
-        public void ComCnpj(string Cnpj)
+        public NotaFiscalBuilder ComCnpj(string Cnpj)
         {
             this.Cnpj = Cnpj;
+            return this;
         }
 
-        public void ComItem(Item item)
+        public NotaFiscalBuilder ComItem(Item item)
         {
             todoItens.Add(item);
             valorTotal += item.Valor;
             impostos += item.Valor + 0.05;
+            return this;
         }
 
-        public void ComObservacoes(string Observacoes)
+        public NotaFiscalBuilder ComObservacoes(string Observacoes)
         {
             this.Observacoes = Observacoes;
+            return this;
         }
 
-        public void NaDataAtual()
+        public NotaFiscalBuilder NaDataAtual()
         {
             this.Data = DateTime.Now;
+            return this;
         }
     }
 }
